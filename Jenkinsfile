@@ -12,8 +12,8 @@ pipeline {
         stage('Clean Old Containers') {
             steps {
                 bat '''
-                FOR /F "tokens=*" %%i IN ('docker ps -q') DO docker stop %%i
-                FOR /F "tokens=*" %%i IN ('docker ps -aq') DO docker rm %%i
+                docker stop scm-container 2>nul || echo no container
+                docker rm scm-container 2>nul || echo no container
                 '''
             }
         }
