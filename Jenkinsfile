@@ -9,10 +9,10 @@ pipeline {
             }
         }
 
-        stage('Stop Old Container') {
+        stage('Clean Old Containers') {
             steps {
-                bat 'docker stop scm-container || exit 0'
-                bat 'docker rm scm-container || exit 0'
+                bat 'for /f "tokens=*" %%i in (\'docker ps -q\') do docker stop %%i'
+                bat 'for /f "tokens=*" %%i in (\'docker ps -aq\') do docker rm %%i'
             }
         }
 
