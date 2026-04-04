@@ -9,9 +9,16 @@ pipeline {
             }
         }
 
+        stage('Stop Old Container') {
+            steps {
+                bat 'docker stop scm-container || exit 0'
+                bat 'docker rm scm-container || exit 0'
+            }
+        }
+
         stage('Run Container') {
             steps {
-                bat 'docker run -d -p 3000:3000 scm-project'
+                bat 'docker run -d -p 3000:3000 --name scm-container scm-project'
             }
         }
     }
