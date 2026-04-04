@@ -12,10 +12,11 @@ pipeline {
         stage('Clean Old Containers') {
             steps {
                 bat '''
-                docker stop scm-container 2>nul || echo no container
-                docker rm scm-container 2>nul || echo no container
+                docker stop scm-container >nul 2>&1
+                docker rm scm-container >nul 2>&1
+                exit /b 0
                 '''
-            }
+                }
         }
 
         stage('Run Container') {
