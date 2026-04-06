@@ -5,6 +5,7 @@ const app = express();
 
 app.get("/", (req, res) => {
     res.send("SCM DevOps Project Running... 🚀");
+    res.send("Hello From SCM Project....");
 });
 
 app.listen(3000, () => {
